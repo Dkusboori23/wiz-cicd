@@ -1,0 +1,166 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings",
+              "skipLineCount": 0
+            },
+            "storeSettings": {
+              "type": "AzureBlobFSReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "DelimitedText",
+              "typeProperties": {
+                "location": {
+                  "type": "AzureBlobFSLocation",
+                  "fileSystem": "raw-data",
+                  "folderPath": "csv",
+                  "fileName": "Orders_Data.csv"
+                },
+                "columnDelimiter": ",",
+                "rowDelimiter": "\n",
+                "quoteChar": "\"",
+                "escapeChar": "\\",
+                "firstRowAsHeader": true
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "b1aad4f0-7094-4d74-b04f-2929ff43616d"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "table": "Orders_Data"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "wiz79",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "ec52a674-eb21-893a-445f-25d7912ce2ed",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "SalesOrderID",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "SalesOrderID",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "SalesOrderDetailID",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "SalesOrderDetailID",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "OrderQty",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "OrderQty",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "ProductID",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "ProductID",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "UnitPrice",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "UnitPrice",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "UnitPriceDiscount",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "UnitPriceDiscount",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "ModifiedDate\r",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "ModifiedDate\r",
+                  "physicalType": "string"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy_sb4",
+        "dependsOn": []
+      }
+    ]
+  }
+}
