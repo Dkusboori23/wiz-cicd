@@ -160,7 +160,35 @@
         },
         "name": "Copy_sb4",
         "dependsOn": []
+      },
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "pipeline_status",
+          "value": {
+            "value": "@activity('Copy_sb4').output.dataRead",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set variable1",
+        "dependsOn": [
+          {
+            "activity": "Copy_sb4",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
       }
-    ]
+    ],
+    "variables": {
+      "pipeline_status": {
+        "type": "Integer"
+      }
+    }
   }
 }
